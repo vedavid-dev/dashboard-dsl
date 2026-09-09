@@ -8,7 +8,7 @@ pub use template::parse_template;
 use crate::diagnostic::Diagnostic;
 use crate::tree::{Direction, Level, RankBy, SortDir, Step, Thresholds, Unit};
 use fields::Fields;
-use serde_yaml::Value;
+use yaml_serde::Value;
 
 pub const SUPPORTED_VERSION: u64 = 1;
 
@@ -108,7 +108,7 @@ const ELEMENT_FIELDS: &[&str] = &[
 
 pub fn parse(yaml: &str) -> (Option<Document>, Vec<Diagnostic>) {
     let mut diags = Vec::new();
-    let value: Value = match serde_yaml::from_str(yaml) {
+    let value: Value = match yaml_serde::from_str(yaml) {
         Ok(v) => v,
         Err(e) => {
             let mut d = Diagnostic::error("E-001", "", format!("YAML is not well-formed: {e}"));
