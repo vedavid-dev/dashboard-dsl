@@ -1,0 +1,9 @@
+version: 1
+id: unknown-field
+title: Unknown field
+elements:
+  - type: stat
+    title: Pods
+    query: count(kube_pod_info)
+    unit: count
+    colour: red

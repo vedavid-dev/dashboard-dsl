@@ -1,0 +1,44 @@
+{
+  "compiler": "0.1.0",
+  "hash": "2ba71b213c1bea4b",
+  "id": "thresholds-below",
+  "schema": 1,
+  "sections": [
+    {
+      "elements": [
+        {
+          "decimals": 3,
+          "description": null,
+          "id": "thresholds-below.e0",
+          "query": {
+            "arity": "one",
+            "expects": "vector",
+            "expr": "sum(rate(http_requests_total{code!~\"5..\"}[5m])) / sum(rate(http_requests_total[5m]))",
+            "mode": "instant",
+            "uses_variables": []
+          },
+          "thresholds": {
+            "direction": "below",
+            "steps": [
+              {
+                "at": 99,
+                "level": "warning"
+              },
+              {
+                "at": 95,
+                "level": "critical"
+              }
+            ]
+          },
+          "title": "Success ratio",
+          "type": "stat",
+          "unit": "ratio"
+        }
+      ],
+      "id": "thresholds-below.s0",
+      "title": null
+    }
+  ],
+  "title": "Availability",
+  "variables": []
+}

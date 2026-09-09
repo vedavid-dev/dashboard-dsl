@@ -1,0 +1,513 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RenderTree",
+  "type": "object",
+  "required": [
+    "compiler",
+    "hash",
+    "id",
+    "schema",
+    "sections",
+    "title",
+    "variables"
+  ],
+  "properties": {
+    "compiler": {
+      "type": "string"
+    },
+    "hash": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0.0
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Section"
+      }
+    },
+    "title": {
+      "type": "string"
+    },
+    "variables": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Variable"
+      }
+    }
+  },
+  "definitions": {
+    "Arity": {
+      "type": "string",
+      "enum": [
+        "one",
+        "many"
+      ]
+    },
+    "Direction": {
+      "type": "string",
+      "enum": [
+        "above",
+        "below"
+      ]
+    },
+    "Element": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "series",
+            "stack",
+            "type"
+          ],
+          "properties": {
+            "max": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
+            },
+            "min": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
+            },
+            "series": {
+              "$ref": "#/definitions/Series"
+            },
+            "stack": {
+              "type": "boolean"
+            },
+            "thresholds": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Thresholds"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "line"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "decimals",
+            "type"
+          ],
+          "properties": {
+            "decimals": {
+              "type": "integer",
+              "format": "uint8",
+              "minimum": 0.0
+            },
+            "thresholds": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Thresholds"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "stat"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "series",
+            "sparkline",
+            "type"
+          ],
+          "properties": {
+            "series": {
+              "$ref": "#/definitions/Series"
+            },
+            "sparkline": {
+              "type": "boolean"
+            },
+            "thresholds": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Thresholds"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "list"
+              ]
+            }
+          }
+        }
+      ],
+      "required": [
+        "id",
+        "query",
+        "title",
+        "unit"
+      ],
+      "properties": {
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "query": {
+          "$ref": "#/definitions/Query"
+        },
+        "title": {
+          "type": "string"
+        },
+        "unit": {
+          "$ref": "#/definitions/Unit"
+        }
+      }
+    },
+    "Expects": {
+      "type": "string",
+      "enum": [
+        "matrix",
+        "vector"
+      ]
+    },
+    "LabelTemplate": {
+      "type": "object",
+      "required": [
+        "segments"
+      ],
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Segment"
+          }
+        }
+      }
+    },
+    "Level": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "warning",
+        "critical"
+      ]
+    },
+    "Mode": {
+      "type": "string",
+      "enum": [
+        "range",
+        "instant"
+      ]
+    },
+    "Query": {
+      "type": "object",
+      "required": [
+        "arity",
+        "expects",
+        "expr",
+        "mode",
+        "uses_variables"
+      ],
+      "properties": {
+        "arity": {
+          "$ref": "#/definitions/Arity"
+        },
+        "expects": {
+          "$ref": "#/definitions/Expects"
+        },
+        "expr": {
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/definitions/Mode"
+        },
+        "uses_variables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RankBy": {
+      "type": "string",
+      "enum": [
+        "max",
+        "min",
+        "mean",
+        "last"
+      ]
+    },
+    "Reduce": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "n",
+            "op",
+            "rank_by"
+          ],
+          "properties": {
+            "n": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "op": {
+              "type": "string",
+              "enum": [
+                "top"
+              ]
+            },
+            "rank_by": {
+              "$ref": "#/definitions/RankBy"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "dir",
+            "limit",
+            "op"
+          ],
+          "properties": {
+            "dir": {
+              "$ref": "#/definitions/SortDir"
+            },
+            "limit": {
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "op": {
+              "type": "string",
+              "enum": [
+                "sort"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Section": {
+      "type": "object",
+      "required": [
+        "elements",
+        "id"
+      ],
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Element"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Segment": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "label"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "literal"
+          ],
+          "properties": {
+            "literal": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Series": {
+      "type": "object",
+      "properties": {
+        "label_template": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/LabelTemplate"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reduce": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Reduce"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "SortDir": {
+      "type": "string",
+      "enum": [
+        "asc",
+        "desc",
+        "label"
+      ]
+    },
+    "Step": {
+      "type": "object",
+      "required": [
+        "at",
+        "level"
+      ],
+      "properties": {
+        "at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "level": {
+          "$ref": "#/definitions/Level"
+        }
+      }
+    },
+    "Thresholds": {
+      "type": "object",
+      "required": [
+        "direction",
+        "steps"
+      ],
+      "properties": {
+        "direction": {
+          "$ref": "#/definitions/Direction"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        }
+      }
+    },
+    "Unit": {
+      "description": "Closed enum: a consumer that does not know a value falls back to `short`.",
+      "type": "string",
+      "enum": [
+        "short",
+        "percent",
+        "ratio",
+        "count",
+        "bytes",
+        "bytes_per_sec",
+        "seconds",
+        "milliseconds",
+        "duration",
+        "ops_per_sec",
+        "requests_per_sec",
+        "cores"
+      ]
+    },
+    "Variable": {
+      "type": "object",
+      "required": [
+        "label",
+        "name",
+        "required",
+        "source"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "source": {
+          "$ref": "#/definitions/VariableSource"
+        }
+      }
+    },
+    "VariableSource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "label",
+            "metric"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "label_values"
+              ]
+            },
+            "label": {
+              "type": "string"
+            },
+            "metric": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

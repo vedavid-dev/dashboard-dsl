@@ -1,0 +1,93 @@
+{
+  "compiler": "0.1.0",
+  "hash": "ad22e5db2ec4f98e",
+  "id": "k8s-namespace",
+  "schema": 1,
+  "sections": [
+    {
+      "elements": [
+        {
+          "description": null,
+          "id": "k8s-namespace.e0",
+          "max": null,
+          "min": null,
+          "query": {
+            "arity": "many",
+            "expects": "matrix",
+            "expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"$namespace\"}[5m]))",
+            "mode": "range",
+            "uses_variables": [
+              "namespace"
+            ]
+          },
+          "series": {
+            "label_template": {
+              "segments": [
+                {
+                  "label": "pod"
+                }
+              ]
+            },
+            "reduce": {
+              "n": 5,
+              "op": "top",
+              "rank_by": "max"
+            }
+          },
+          "stack": false,
+          "thresholds": null,
+          "title": "CPU by pod",
+          "type": "line",
+          "unit": "cores"
+        },
+        {
+          "description": null,
+          "id": "k8s-namespace.e1",
+          "query": {
+            "arity": "many",
+            "expects": "vector",
+            "expr": "sum by (pod) (container_memory_working_set_bytes{namespace=\"$namespace\"})",
+            "mode": "instant",
+            "uses_variables": [
+              "namespace"
+            ]
+          },
+          "series": {
+            "label_template": {
+              "segments": [
+                {
+                  "label": "pod"
+                }
+              ]
+            },
+            "reduce": {
+              "dir": "desc",
+              "limit": 20,
+              "op": "sort"
+            }
+          },
+          "sparkline": false,
+          "thresholds": null,
+          "title": "Memory by pod",
+          "type": "list",
+          "unit": "bytes"
+        }
+      ],
+      "id": "k8s-namespace.s0",
+      "title": "Compute"
+    }
+  ],
+  "title": "Namespace",
+  "variables": [
+    {
+      "label": "Namespace",
+      "name": "namespace",
+      "required": true,
+      "source": {
+        "kind": "label_values",
+        "label": "namespace",
+        "metric": "kube_pod_info"
+      }
+    }
+  ]
+}

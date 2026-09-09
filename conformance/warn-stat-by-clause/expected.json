@@ -1,0 +1,32 @@
+{
+  "compiler": "0.1.0",
+  "hash": "a10028326bae8b61",
+  "id": "stat-by-clause",
+  "schema": 1,
+  "sections": [
+    {
+      "elements": [
+        {
+          "decimals": 2,
+          "description": null,
+          "id": "stat-by-clause.e0",
+          "query": {
+            "arity": "one",
+            "expects": "vector",
+            "expr": "sum by (pod) (rate(container_cpu_usage_seconds_total[5m]))",
+            "mode": "instant",
+            "uses_variables": []
+          },
+          "thresholds": null,
+          "title": "CPU by pod",
+          "type": "stat",
+          "unit": "cores"
+        }
+      ],
+      "id": "stat-by-clause.s0",
+      "title": null
+    }
+  ],
+  "title": "Stat with a by clause",
+  "variables": []
+}

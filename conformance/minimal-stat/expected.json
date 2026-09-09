@@ -1,0 +1,32 @@
+{
+  "compiler": "0.1.0",
+  "hash": "28ce66048114bbd5",
+  "id": "minimal",
+  "schema": 1,
+  "sections": [
+    {
+      "elements": [
+        {
+          "decimals": 0,
+          "description": null,
+          "id": "minimal.e0",
+          "query": {
+            "arity": "one",
+            "expects": "vector",
+            "expr": "count(kube_pod_info)",
+            "mode": "instant",
+            "uses_variables": []
+          },
+          "thresholds": null,
+          "title": "Pods running",
+          "type": "stat",
+          "unit": "count"
+        }
+      ],
+      "id": "minimal.s0",
+      "title": null
+    }
+  ],
+  "title": "Minimal",
+  "variables": []
+}

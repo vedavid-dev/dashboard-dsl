@@ -1,0 +1,8 @@
+version: 1
+id: undeclared-var
+title: Undeclared variable
+elements:
+  - type: line
+    title: CPU
+    query: sum(rate(container_cpu_usage_seconds_total{cluster="$cluster"}[5m]))
+    unit: cores

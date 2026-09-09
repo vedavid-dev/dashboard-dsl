@@ -1,0 +1,8 @@
+[
+  {
+    "severity": "error",
+    "code": "E-009",
+    "message": "`rank_by` requires `top`",
+    "path": "elements[0].series.rank_by"
+  }
+]

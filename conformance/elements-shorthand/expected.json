@@ -1,0 +1,38 @@
+{
+  "compiler": "0.1.0",
+  "hash": "a415111840c4168c",
+  "id": "shorthand",
+  "schema": 1,
+  "sections": [
+    {
+      "elements": [
+        {
+          "description": null,
+          "id": "shorthand.e0",
+          "max": null,
+          "min": null,
+          "query": {
+            "arity": "many",
+            "expects": "matrix",
+            "expr": "sum(rate(http_requests_total[5m]))",
+            "mode": "range",
+            "uses_variables": []
+          },
+          "series": {
+            "label_template": null,
+            "reduce": null
+          },
+          "stack": false,
+          "thresholds": null,
+          "title": "Requests",
+          "type": "line",
+          "unit": "requests_per_sec"
+        }
+      ],
+      "id": "shorthand.s0",
+      "title": null
+    }
+  ],
+  "title": "Shorthand",
+  "variables": []
+}

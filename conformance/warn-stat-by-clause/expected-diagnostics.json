@@ -1,0 +1,8 @@
+[
+  {
+    "severity": "warning",
+    "code": "W-004",
+    "message": "a `stat` query with a `by (` clause is likely to return more than one series",
+    "path": "elements[0].query"
+  }
+]

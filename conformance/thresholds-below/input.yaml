@@ -1,0 +1,14 @@
+version: 1
+id: thresholds-below
+title: Availability
+elements:
+  - type: stat
+    title: Success ratio
+    query: sum(rate(http_requests_total{code!~"5.."}[5m])) / sum(rate(http_requests_total[5m]))
+    unit: ratio
+    decimals: 3
+    thresholds:
+      direction: below
+      steps:
+        - { at: 99, level: warning }
+        - { at: 95, level: critical }

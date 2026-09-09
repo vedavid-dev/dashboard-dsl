@@ -1,0 +1,23 @@
+version: 1
+id: k8s-namespace
+title: Namespace
+variables:
+  - name: namespace
+    source:
+      metric: kube_pod_info
+      label: namespace
+sections:
+  - title: Compute
+    elements:
+      - type: line
+        title: CPU by pod
+        query: sum by (pod) (rate(container_cpu_usage_seconds_total{namespace="$namespace"}[5m]))
+        unit: cores
+        series:
+          label: "{{pod}}"
+          top: 5
+      - type: list
+        title: Memory by pod
+        query: sum by (pod) (container_memory_working_set_bytes{namespace="$namespace"})
+        unit: bytes
+        label: "{{pod}}"

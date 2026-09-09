@@ -1,0 +1,8 @@
+version: 1
+id: stat-by-clause
+title: Stat with a by clause
+elements:
+  - type: stat
+    title: CPU by pod
+    query: sum by (pod) (rate(container_cpu_usage_seconds_total[5m]))
+    unit: cores

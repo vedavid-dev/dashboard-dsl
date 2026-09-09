@@ -1,0 +1,8 @@
+[
+  {
+    "severity": "error",
+    "code": "E-002",
+    "message": "unknown field `colour`",
+    "path": "elements[0].colour"
+  }
+]

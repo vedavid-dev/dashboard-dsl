@@ -1,0 +1,52 @@
+{
+  "compiler": "0.1.0",
+  "hash": "e5788695fe27dbaf",
+  "id": "multi-label",
+  "schema": 1,
+  "sections": [
+    {
+      "elements": [
+        {
+          "description": null,
+          "id": "multi-label.e0",
+          "query": {
+            "arity": "many",
+            "expects": "vector",
+            "expr": "sum by (namespace, pod) (container_memory_working_set_bytes)",
+            "mode": "instant",
+            "uses_variables": []
+          },
+          "series": {
+            "label_template": {
+              "segments": [
+                {
+                  "label": "namespace"
+                },
+                {
+                  "literal": "/"
+                },
+                {
+                  "label": "pod"
+                }
+              ]
+            },
+            "reduce": {
+              "dir": "asc",
+              "limit": 5,
+              "op": "sort"
+            }
+          },
+          "sparkline": false,
+          "thresholds": null,
+          "title": "Pods",
+          "type": "list",
+          "unit": "bytes"
+        }
+      ],
+      "id": "multi-label.s0",
+      "title": null
+    }
+  ],
+  "title": "Multi label",
+  "variables": []
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "severity": "error",
+    "code": "E-010",
+    "message": "query references undeclared variable $cluster",
+    "path": "elements[0].query"
+  }
+]

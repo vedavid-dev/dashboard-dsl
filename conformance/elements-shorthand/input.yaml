@@ -1,0 +1,8 @@
+version: 1
+id: shorthand
+title: Shorthand
+elements:
+  - type: line
+    title: Requests
+    query: sum(rate(http_requests_total[5m]))
+    unit: requests_per_sec

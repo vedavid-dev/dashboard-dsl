@@ -1,0 +1,8 @@
+version: 1
+id: minimal
+title: Minimal
+elements:
+  - type: stat
+    title: Pods running
+    query: count(kube_pod_info)
+    unit: count

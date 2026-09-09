@@ -1,0 +1,11 @@
+version: 1
+id: multi-label
+title: Multi label
+elements:
+  - type: list
+    title: Pods
+    query: sum by (namespace, pod) (container_memory_working_set_bytes)
+    unit: bytes
+    label: "{{namespace}}/{{pod}}"
+    sort: asc
+    limit: 5

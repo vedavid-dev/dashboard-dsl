@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+          targets: wasm32-unknown-unknown
+
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test
+
+      # The library must stay usable from a browser preview.
+      - run: cargo build --target wasm32-unknown-unknown
+
+      - name: The checked-in schema matches the types
+        run: |
+          cargo run -q -p vedavid-dash -- schema render-tree > /tmp/render-tree.schema.json
+          diff -u schema/render-tree.schema.json /tmp/render-tree.schema.json

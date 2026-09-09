@@ -1,0 +1,10 @@
+version: 1
+id: rank-without-top
+title: Rank without top
+elements:
+  - type: line
+    title: CPU by pod
+    query: sum by (pod) (rate(container_cpu_usage_seconds_total[5m]))
+    unit: cores
+    series:
+      rank_by: mean
