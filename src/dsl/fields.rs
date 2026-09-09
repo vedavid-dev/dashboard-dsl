@@ -1,5 +1,5 @@
 use crate::diagnostic::Diagnostic;
-use serde_yaml::{Mapping, Value};
+use yaml_serde::{Mapping, Value};
 
 /// A mapping being read key by key. Whatever is left when `finish` runs was
 /// not a field this level knows.
