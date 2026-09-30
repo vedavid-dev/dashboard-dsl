@@ -8,6 +8,7 @@
     "id",
     "schema",
     "sections",
+    "tags",
     "title",
     "variables"
   ],
@@ -30,6 +31,12 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/Section"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "title": {

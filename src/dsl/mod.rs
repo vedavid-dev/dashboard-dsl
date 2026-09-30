@@ -23,6 +23,7 @@ pub const DEFAULT_LIMIT: u64 = 20;
 pub struct Document {
     pub id: String,
     pub title: String,
+    pub tags: Vec<String>,
     pub variables: Vec<Variable>,
     pub sections: Vec<Section>,
 }
@@ -141,6 +142,11 @@ pub fn parse(yaml: &str) -> (Option<Document>, Vec<Diagnostic>) {
         .required_str("title", &mut diags)
         .and_then(|s| check_len(&s, "title", 1, MAX_TITLE, &mut diags));
 
+    let tags = match root.get("tags") {
+        Some(v) => parse_tags(v, &mut diags),
+        None => Vec::new(),
+    };
+
     let variables = match root.get("variables") {
         Some(v) => parse_variables(v, &mut diags),
         None => Vec::new(),
@@ -188,6 +194,7 @@ pub fn parse(yaml: &str) -> (Option<Document>, Vec<Diagnostic>) {
             Some(Document {
                 id,
                 title,
+                tags,
                 variables,
                 sections,
             }),
@@ -195,6 +202,33 @@ pub fn parse(yaml: &str) -> (Option<Document>, Vec<Diagnostic>) {
         ),
         _ => (None, diags),
     }
+}
+
+fn parse_tags(value: &Value, diags: &mut Vec<Diagnostic>) -> Vec<String> {
+    let Some(items) = as_sequence(value, "tags", diags) else {
+        return Vec::new();
+    };
+    let mut out: Vec<String> = Vec::new();
+    for (i, item) in items.iter().enumerate() {
+        let path = format!("tags[{i}]");
+        let Some(s) = item.as_str() else {
+            diags.push(Diagnostic::error("E-004", &path, "expected a string"));
+            continue;
+        };
+        let Some(tag) = check_pattern(s, &path, is_tag, diags) else {
+            continue;
+        };
+        if out.contains(&tag) {
+            diags.push(Diagnostic::error(
+                "E-011",
+                &path,
+                format!("duplicate tag `{tag}`"),
+            ));
+            continue;
+        }
+        out.push(tag);
+    }
+    out
 }
 
 fn parse_variables(value: &Value, diags: &mut Vec<Diagnostic>) -> Vec<Variable> {
@@ -629,6 +663,15 @@ fn check_range(n: u64, path: &str, min: u64, max: u64, diags: &mut Vec<Diagnosti
 fn is_dashboard_id(s: &str) -> bool {
     let b = s.as_bytes();
     if b.is_empty() || b.len() > 64 {
+        return false;
+    }
+    let alnum = |c: u8| c.is_ascii_lowercase() || c.is_ascii_digit();
+    alnum(b[0]) && alnum(b[b.len() - 1]) && b.iter().all(|&c| alnum(c) || c == b'-')
+}
+
+fn is_tag(s: &str) -> bool {
+    let b = s.as_bytes();
+    if b.is_empty() || b.len() > 32 {
         return false;
     }
     let alnum = |c: u8| c.is_ascii_lowercase() || c.is_ascii_digit();

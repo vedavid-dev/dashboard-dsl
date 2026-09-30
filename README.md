@@ -27,6 +27,7 @@ golden file. All filesystem access lives in the `vedavid-dash` binary.
 version: 1
 id: k8s-namespace          # identity comes from this field, never the filename
 title: Namespace
+tags: [kubernetes, compute]
 variables:
   - name: namespace
     source:
@@ -46,6 +47,11 @@ sections:
 
 Use `elements:` at the top level instead of `sections:` for a single-section
 dashboard; it compiles to one untitled section.
+
+`tags` is optional. The app lists every tag it sees across a tenant's
+dashboards and filters the list by the ones tapped. A tag is lowercase
+letters, digits and hyphens, up to 32 characters, and may not repeat within a
+document.
 
 There is no size, position or column anywhere. Layout is an ordered
 full-width vertical scroll, and the order in the document is the order on

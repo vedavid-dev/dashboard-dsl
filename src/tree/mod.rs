@@ -11,6 +11,7 @@ pub struct RenderTree {
     pub schema: u32,
     pub id: String,
     pub title: String,
+    pub tags: Vec<String>,
     pub hash: String,
     pub compiler: String,
     pub variables: Vec<Variable>,

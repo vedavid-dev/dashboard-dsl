@@ -1,6 +1,6 @@
 {
   "compiler": "0.1.0",
-  "hash": "2ba71b213c1bea4b",
+  "hash": "ac385d66fc760b13",
   "id": "thresholds-below",
   "schema": 1,
   "sections": [
@@ -39,6 +39,7 @@
       "title": null
     }
   ],
+  "tags": [],
   "title": "Availability",
   "variables": []
 }

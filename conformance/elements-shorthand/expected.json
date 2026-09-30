@@ -1,6 +1,6 @@
 {
   "compiler": "0.1.0",
-  "hash": "a415111840c4168c",
+  "hash": "05f05c8ccfce7697",
   "id": "shorthand",
   "schema": 1,
   "sections": [
@@ -33,6 +33,7 @@
       "title": null
     }
   ],
+  "tags": [],
   "title": "Shorthand",
   "variables": []
 }

@@ -1,7 +1,7 @@
 {
   "compiler": "0.1.0",
-  "hash": "6c914270d92582c5",
-  "id": "minimal",
+  "hash": "94b592dfc2155416",
+  "id": "tagged",
   "schema": 1,
   "sections": [
     {
@@ -9,7 +9,7 @@
         {
           "decimals": 0,
           "description": null,
-          "id": "minimal.e0",
+          "id": "tagged.e0",
           "query": {
             "arity": "one",
             "expects": "vector",
@@ -23,11 +23,15 @@
           "unit": "count"
         }
       ],
-      "id": "minimal.s0",
+      "id": "tagged.s0",
       "title": null
     }
   ],
-  "tags": [],
-  "title": "Minimal",
+  "tags": [
+    "kubernetes",
+    "postgres",
+    "rust-k8s-demo"
+  ],
+  "title": "Tagged",
   "variables": []
 }
