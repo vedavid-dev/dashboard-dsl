@@ -1,6 +1,6 @@
 {
   "compiler": "0.1.0",
-  "hash": "a10028326bae8b61",
+  "hash": "1b2a34e0ddfbff96",
   "id": "stat-by-clause",
   "schema": 1,
   "sections": [
@@ -27,6 +27,7 @@
       "title": null
     }
   ],
+  "tags": [],
   "title": "Stat with a by clause",
   "variables": []
 }

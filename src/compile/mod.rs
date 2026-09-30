@@ -181,6 +181,7 @@ pub fn lower(doc: Document) -> (RenderTree, Vec<Diagnostic>) {
         schema: SCHEMA_VERSION,
         id: doc.id,
         title: doc.title,
+        tags: doc.tags,
         hash: String::new(),
         compiler: env!("CARGO_PKG_VERSION").to_string(),
         variables,

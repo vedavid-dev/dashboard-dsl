@@ -1,0 +1,9 @@
+version: 1
+id: bad-tags
+title: Bad tags
+tags: [kubernetes, Postgres, kubernetes, -redis, 7]
+elements:
+  - type: stat
+    title: Pods running
+    query: count(kube_pod_info)
+    unit: count

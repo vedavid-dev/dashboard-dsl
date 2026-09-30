@@ -1,6 +1,6 @@
 {
   "compiler": "0.1.0",
-  "hash": "e5788695fe27dbaf",
+  "hash": "e499224c8c7f7462",
   "id": "multi-label",
   "schema": 1,
   "sections": [
@@ -47,6 +47,7 @@
       "title": null
     }
   ],
+  "tags": [],
   "title": "Multi label",
   "variables": []
 }

@@ -1,6 +1,6 @@
 {
   "compiler": "0.1.0",
-  "hash": "ad22e5db2ec4f98e",
+  "hash": "5ec96b29776c4dcc",
   "id": "k8s-namespace",
   "schema": 1,
   "sections": [
@@ -77,6 +77,7 @@
       "title": "Compute"
     }
   ],
+  "tags": [],
   "title": "Namespace",
   "variables": [
     {

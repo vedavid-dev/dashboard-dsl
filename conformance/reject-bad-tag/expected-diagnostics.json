@@ -1,0 +1,26 @@
+[
+  {
+    "severity": "error",
+    "code": "E-005",
+    "message": "`Postgres` does not match the required pattern",
+    "path": "tags[1]"
+  },
+  {
+    "severity": "error",
+    "code": "E-011",
+    "message": "duplicate tag `kubernetes`",
+    "path": "tags[2]"
+  },
+  {
+    "severity": "error",
+    "code": "E-005",
+    "message": "`-redis` does not match the required pattern",
+    "path": "tags[3]"
+  },
+  {
+    "severity": "error",
+    "code": "E-004",
+    "message": "expected a string",
+    "path": "tags[4]"
+  }
+]

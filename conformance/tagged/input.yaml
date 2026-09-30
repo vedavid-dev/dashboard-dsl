@@ -1,0 +1,9 @@
+version: 1
+id: tagged
+title: Tagged
+tags: [kubernetes, postgres, rust-k8s-demo]
+elements:
+  - type: stat
+    title: Pods running
+    query: count(kube_pod_info)
+    unit: count
